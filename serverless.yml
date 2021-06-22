@@ -46,5 +46,12 @@ functions:
           path: users/{id}
           method: delete
           cors: true
+  searchUsers:
+    handler: handler.searchUsers
+    events:
+      - http:
+          path: users/search
+          method: post
+          cors: true
 plugins:
   - serverless-offline

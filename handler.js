@@ -93,3 +93,24 @@ module.exports.deleteUsers = (event,context,callback) => {
       })
     }) 
 };
+
+module.exports.searchUsers = (event,context,callback) => {
+  context.callbackWaitsForEmptyEventLoop = false;
+
+  const data = JSON.parse(event.body);
+  const sql = "SELECT FROM users WHERE name LIKE %'"+data.name+"'%;"
+
+  db.query(sql)
+    .then(res => {
+      callback(null,{
+        statusCode: 200,
+        body: "Usuario Encontrado " + res
+      })
+    })
+    .catch(e => {
+      callback(null,{
+        statusCode: e.statusCode || 500,
+        body: "No se encontro Usuario " + e
+      })
+    }) 
+};
