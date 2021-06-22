@@ -98,7 +98,7 @@ module.exports.searchUsers = (event,context,callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
 
   const data = JSON.parse(event.body);
-  const sql = "SELECT FROM users WHERE name LIKE %'"+data.name+"'%;"
+  const sql = "SELECT FROM users WHERE name LIKE '%"+data.name+"%';"
 
   db.query(sql)
     .then(res => {
@@ -110,7 +110,7 @@ module.exports.searchUsers = (event,context,callback) => {
     .catch(e => {
       callback(null,{
         statusCode: e.statusCode || 500,
-        body: "No se encontro Usuario " + e
+        body: "No se encontro Usuario "  + e + "-Query-: "+ sql
       })
     }) 
 };
