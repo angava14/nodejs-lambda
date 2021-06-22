@@ -104,7 +104,7 @@ module.exports.searchUsers = (event,context,callback) => {
     .then(res => {
       callback(null,{
         statusCode: 200,
-        body: "Usuario Encontrado " + res
+        body: "Usuario Encontrado " + JSON.stringify(res)
       })
     })
     .catch(e => {
